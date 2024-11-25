@@ -60,7 +60,7 @@ router.post("/login", async function (req, res){
     }
 
   } catch (error) {
-    res.status(400).json({ status: false, message: "Đã có lỗi xảy ra" });
+    res.status(400).json({ status: false, message: "Đã có lỗi xảy ra" + error});
 
   }
   
