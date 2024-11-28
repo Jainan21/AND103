@@ -45,7 +45,7 @@ router.post("/login", async function (req, res){
     const checkUser = await userModel.findOne({username: username, password: password});
 
     if(checkUser == null){
-      res.status(200). json({status: false, message: "Username và mật khẩu không đúng"});
+      res.status(401). json({status: false, message: "Username và mật khẩu không đúng"});
     }else{
 
     //Token người dùng sẽ sử dụng gửi lên trên header mỗi lần muốn gọi api
