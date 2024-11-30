@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+const multer = require('multer');
+
 
 var productModel = require("../models/productModel");
 var upload = require('../ultil/upload');
@@ -34,11 +36,11 @@ router.get("/quantity", async function (req, res) {
 router.post('/upload', [upload.single('image')],
     async (req, res, next) => {
         try {
-            const { file } = req;
+            const {file} = req;
             if (!file) {
                return res.json({ status: 0, link : "" }); 
             } else {
-                const url = `http://192.168.1.13:3000/images/${file.filename}`;
+                const url = `localhost:3000/images/${file.filename}`;
                 return res.json({ status: 1, url : url });
             }
         } catch (error) {
