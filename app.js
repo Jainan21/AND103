@@ -14,7 +14,7 @@ require('./models/studentModel');
 //Import các router
 var indexRouter = require('./routes/index');  // Đảm bảo đúng đường dẫn
 var usersRouter = require('./routes/users');
-// var productRouter = require('./routes/products');
+var productRouter = require('./routes/products');
 var studentRouter = require('./routes/student');
 var transpoterRouter = require('./routes/transpoter');
 
@@ -38,7 +38,7 @@ mongoose.connect('mongodb+srv://npblam1201:blam21102005@cluster.31ujg.mongodb.ne
 //Sử dụng các router
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-// app.use('/products', productRouter);
+app.use('/products', productRouter);
 app.use('/student', studentRouter);
 app.use('/api', transpoterRouter);
 
