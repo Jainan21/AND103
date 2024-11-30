@@ -38,7 +38,7 @@ router.post('/upload', [upload.single('image')],
             if(!file){
                 return res.json({status: 0, link: ""});
             }else{
-                const url = `http://localhost:3000/images/${file.filename}`;
+                const url = `https://and103-1.onrender.com/images/${file.filename}`;
                 return res.json({status: 1, url: url});
             }
         }catch(error){
