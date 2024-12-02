@@ -125,7 +125,7 @@ router.post("/themSV", async function (req, res) {
 
 // 6. Thay đổi thông tin sinh viên theo MSSV
 //localhost:3000/student/suaSV(post)
-router.post("/suaSV", async function (req, res, next) {
+router.put("/suaSV", async function (req, res, next) {
     try {
       const { id, fullname, mssv, GPA, old, department} = req.body;
   
@@ -285,11 +285,4 @@ router.delete("/delete", async function (req, res) {
         }
     });
 
-
-
-
-
-    //export  đâu ???????
     module.exports = router;
-    // mọe
-    //50
