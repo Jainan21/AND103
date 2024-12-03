@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 
 var serviceModel = require("../models/serviceModel");
-var upload = require('../ultil/upload');
 
 
 module.exports = router;
@@ -19,17 +18,10 @@ router.get("/all", async function (req, res) {
 });
 
 //2
-router.post("/add", [upload.single('image')] , async function (req, res){
+router.post("/add" , async function (req, res){
     try {
-        const {name, used} = req.body;
-        const {file} = req;
-
-        if (!file || !name) {
-            return res.json({ status: 0, message: "Nhập tên và thêm ảnh" });
-        }
-
-        const linkImage = `http://localhost:3000/uploads/${file.filename}`;
-
+        const {name, used, linkImage} = req.body;
+        
         const newService = {name, linkImage, used};
         await serviceModel.create(newService);
         res.json({status: 200, message: "Thêm dịch vụ thành công"});
@@ -55,10 +47,9 @@ router.delete("/delete/:id", async function (req, res) {
   });
 
   //4
-  router.put("/edit", [upload.single('image')], async function (req, res, next) {
+  router.put("/edit", async function (req, res, next) {
     try {
-      const {id, name, used} = req.body;
-      const linkImage = req.file ? req.file.path : null;
+      const {id, name, used, linkImage} = req.body;
   
       var item = await serviceModel.findById(id);
       if (item) {
