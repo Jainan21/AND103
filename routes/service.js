@@ -2,19 +2,29 @@ var express = require('express');
 var router = express.Router();
 
 var serviceModel = require("../models/serviceModel");
-
+const JWT = require('jsonwebtoken');
+const config = require("../ultil/tokenConfig");
 
 module.exports = router;
 
 //1
 router.get("/all", async function (req, res) {
-    try{
-        var list = await serviceModel.find();
-        res.json({status: 200, message: "Thanh cong", data: list});
-    }
-    catch(e){
-      res.json({status: 400, message: "Có lỗi xãy ra: "+ e});
-    }  
+    try {
+      const token = req.header("Authorization").split(' ')[1];
+      if(token){
+          JWT.verify(token, config.SECRETKEY, async function (err, id){
+          if(err){
+              res.status(403).json({status: false,  message: 'Có lỗi xảy ra' + err});
+          }else{
+              var list = await serviceModel.find();
+              res.json({status: 200, message: "Thanh cong", data: list});          }
+          });
+      }else{
+          res.status(401).json({status: false,  message: 'Không xác thực'});
+      }
+  } catch (error) {
+      res.status(400).json({status: false, message: 'Có lỗi xảy ra' + error});
+  }
 });
 
 //2
