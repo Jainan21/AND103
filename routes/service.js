@@ -34,9 +34,9 @@ router.post("/add" , async function (req, res){
         
         const newService = {name, linkImage, used};
         await serviceModel.create(newService);
-        res.json({status: 200, message: "Thêm dịch vụ thành công"});
+        res.json({status: 200, message: "Thêm tỉnh thành công"});
     } catch (error) {
-        res.json({status: 400, message:"Thêm dịch vụ thất bại"});
+        res.json({status: 400, message:"Thêm tỉnh thất bại"});
     }
 });
 
@@ -47,12 +47,12 @@ router.delete("/delete/:id", async function (req, res) {
       const result = await serviceModel.findByIdAndDelete(id);
       
       if(result){
-        res.status(200).json({ status: true, message: "Xóa dịch vụ thành công" });
+        res.status(200).json({ status: true, message: "Xóa tỉnh thành công" });
       }else{
-        res.status(404).json({ status: false, message: "Không tìm thấy dịch vụ"});
+        res.status(404).json({ status: false, message: "Không tìm thấy tỉnh"});
       }
     } catch (err) {
-        res.status(400).json({ status: false, message: "Xóa dịch vụ thất bại", err: err });
+        res.status(400).json({ status: false, message: "Xóa tỉnh thất bại", err: err });
     }
   });
 
@@ -67,10 +67,10 @@ router.delete("/delete/:id", async function (req, res) {
         item.linkImage = linkImage ? linkImage : item.linkImage;
         item.used = used ? used : item.used;
         await item.save();
-        res.json({ status: 200, message: "Sửa dịch vụ thành công" });
+        res.json({ status: 200, message: "Sửa tỉnh thành công" });
       }
     } catch (err) {
-      res.json({ status: 400, message: "Sửa dịch vụ thất bại" });
+      res.json({ status: 400, message: "Sửa tỉnh thất bại" });
     }
   });
 
